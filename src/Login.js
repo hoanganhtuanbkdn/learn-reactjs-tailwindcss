@@ -1,11 +1,17 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 
 import SideRight from './assets/images/side-right.png';
 function Login() {
 	const navigate = useNavigate();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [isShowPassword, setIsShowPassword] = useState(false);
+
+	const toggleShowPassword = () => {
+		setIsShowPassword(!isShowPassword);
+	};
 	const onLogin = () => {
 		if (!email) {
 			return alert('Email is required');
@@ -34,15 +40,25 @@ function Login() {
 							value={email}
 							onChange={(event) => setEmail(event.target.value)}
 						/>
-						<input
-							className="w-full h-10 border border-gray-300 rounded mt-[16px] px-[14px]"
-							placeholder="Password"
-							type="password"
-							value={password}
-							onChange={(event) =>
-								setPassword(event.target.value)
-							}
-						/>
+						<div className="relative flex flex-row items-center  mt-[16px]">
+							<input
+								className="w-full h-10 border border-gray-300 rounded px-[14px]"
+								placeholder="Password"
+								type={isShowPassword ? 'text' : 'password'}
+								value={password}
+								onChange={(event) =>
+									setPassword(event.target.value)
+								}
+							/>
+							<button
+								className="absolute right-4"
+								onClick={toggleShowPassword}
+								type="button"
+							>
+								{isShowPassword ? <IoMdEyeOff /> : <IoMdEye />}
+							</button>
+						</div>
+
 						<button
 							className="w-full h-10 bg-[#42A7C3] rounded mt-[32px]"
 							type="submit"
