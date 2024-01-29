@@ -1,12 +1,8 @@
-import { useState } from 'react';
 import Logo from '../assets/images/logo.png';
 import Menu from './Menu';
-function Header() {
-	const [count, setCount] = useState(0);
+import { Link } from 'react-router-dom';
 
-	const incrementCount = () => {
-		setCount(count + 1);
-	};
+function Header() {
 	return (
 		<header
 			className={
@@ -21,12 +17,12 @@ function Header() {
 				<Menu href="/contact" label="Contact" />
 				<Menu href="/about-us" label="About Us" />
 			</div>
-			<button
-				onClick={incrementCount}
-				className="bg-[#FA8443] rounded-lg h-[46px] w-[120px] text-white"
+			<Link
+				to="/login"
+				className="bg-[#FA8443] rounded-lg h-[46px] w-[120px] text-white flex items-center justify-center	"
 			>
-				Sign Up {count}
-			</button>
+				<span>Sign In</span>
+			</Link>
 		</header>
 	);
 }
