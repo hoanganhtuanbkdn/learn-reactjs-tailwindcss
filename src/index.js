@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './assets/css/index.css';
 import Home from './pages/Home';
 import Product from './pages/Product';
+import ProductDetail from './pages/ProductDetail';
 import AboutUs from './pages/AboutUs';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
 			<Route index element={<Home />} />
 			<Route path="contact" element={<Contact />} />
 			<Route path="product" element={<Product />} />
+			<Route path="product/:productName" element={<ProductDetail />} />
 			<Route path="about-us" element={<AboutUs />} />
 			<Route path="login" element={<Login />} />
 		</Route>

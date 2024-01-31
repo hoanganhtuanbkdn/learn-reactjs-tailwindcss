@@ -1,9 +1,13 @@
+import { Link } from 'react-router-dom';
+
 function BlogItem(props) {
-	const { photo } = props;
+	const { photo, item } = props;
 	return (
 		<div className="">
 			<img src={photo} alt="" className="aspect-[284/160] w-full "></img>
-			<p>Flores Road Trip 3D2N</p>
+			<Link to={'/product/' + item.name}>
+				<p>{item.name}</p>
+			</Link>
 		</div>
 	);
 }
