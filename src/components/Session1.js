@@ -1,24 +1,7 @@
 import Photo from '../assets/images/photo1.png';
 import BlogItem from './BlogItem';
 
-const listPost = [
-	{
-		id: 1,
-		name: 'Ha Noi',
-	},
-	{
-		id: 2,
-		name: 'Ho Chi Minh',
-	},
-	{
-		id: 3,
-		name: 'Da Nang',
-	},
-	{
-		id: 4,
-		name: 'Da Lat',
-	},
-];
+import { listPost } from '../constants/posts';
 
 function Session1() {
 	return (

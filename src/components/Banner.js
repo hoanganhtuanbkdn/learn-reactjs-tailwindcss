@@ -5,7 +5,7 @@ import Banner1 from '../assets/images/banner1.png';
 function Banner({ title }) {
 	return (
 		<main className="h-[594px] w-full  grid grid-cols-2 gap-[25px]">
-			<div className=" flex flex-col space-y-[16px]">
+			<div className=" flex flex-col space-y-[16px] pt-20">
 				<h1 className="text-[46px] font-bold leading-[60px]">
 					{title}
 				</h1>

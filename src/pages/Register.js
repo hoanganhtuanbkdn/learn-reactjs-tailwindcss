@@ -1,13 +1,10 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
-import { ThemeContext } from '../App';
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function Login() {
-	const { setUserEmail } = useContext(ThemeContext);
-
 	const navigate = useNavigate();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -33,8 +30,6 @@ function Login() {
 			return alert('Email or Password incorrect');
 		}
 
-		// Lưu email vào context
-		setUserEmail(email);
 		alert('Login Successful With: ' + email + ' | ' + password);
 		navigate('/');
 	};
@@ -71,32 +66,15 @@ function Login() {
 					className="w-full h-10 bg-[#42A7C3] rounded mt-[32px]"
 					type="submit"
 				>
-					LOGIN
+					Register
 				</button>
 				<p className="mt-[32px]">
-					You haven't account{' '}
-					<Link
-						className="text-[#42A7C3] font-semibold"
-						to="/register"
-					>
+					You have account{' '}
+					<Link className="text-[#42A7C3] font-semibold" to="/login">
 						{' '}
-						Register
+						Login
 					</Link>
 				</p>
-				<button
-					className="flex flex-row items-center gap-3 mt-[32px]"
-					type="button"
-				>
-					<div className="h-[2px] bg-gray-400 flex flex-1" />
-					<p>Login By Social</p>
-					<div className="h-[2px] bg-gray-400 flex flex-1" />
-				</button>
-				<button className="h-[48px] w-full border border-gray-600 rounded mt-[32px]">
-					Google
-				</button>
-				<button className="h-[48px] w-full border border-gray-600 rounded mt-[32px]">
-					Facebook
-				</button>
 			</form>
 		</div>
 	);
