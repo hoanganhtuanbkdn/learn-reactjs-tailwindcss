@@ -41,7 +41,14 @@
 			"photo": "https://plus.unsplash.com/premium_photo-1691960159290-6f4ace6e6c4c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fEhhJTIwbm9pfGVufDB8fDB8fHww"
 		}
 	],
-	"profile": {
-		"name": "Supper Man"
-	}
+	"users": [
+		{
+			"email": "admin@admin.com",
+			"password": "admin@123"
+		},
+		{
+			"email": "user@user.com",
+			"password": "user@123"
+		}
+	]
 }

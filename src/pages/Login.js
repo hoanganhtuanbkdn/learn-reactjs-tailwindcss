@@ -16,6 +16,7 @@ function Login() {
 	const toggleShowPassword = () => {
 		setIsShowPassword(!isShowPassword);
 	};
+
 	const onLogin = () => {
 		if (!email) {
 			return alert('Email is required');
@@ -29,21 +30,29 @@ function Login() {
 		if (password?.length < 8) {
 			return alert('Password must min 8 characters');
 		}
-		if (email !== 'admin@admin.com' || password !== 'admin@123') {
-			return alert('Email or Password incorrect');
-		}
 
-		// Lưu email vào context
-		setUserEmail(email);
-		alert('Login Successful With: ' + email + ' | ' + password);
-		navigate('/');
+		fetch(`http://localhost:4000/users?email=${email}&password=${password}`)
+			.then((raw) => raw.json())
+			.then((response) => {
+				// Nếu email và password đúng thì response sẽ trả về kết quả
+				// Nếu email và password sai, response sẽ trả về mảng rỗng.
+
+				if (response.length > 0) {
+					// Lưu email vào context
+					setUserEmail(email);
+					alert('Login Successful With: ' + email + ' | ' + password);
+					navigate('/');
+				} else {
+					return alert('Email or Password incorrect');
+				}
+			})
+			.catch((error) => {
+				return alert(error.message);
+			});
 	};
 	return (
 		<div className="flex items-center justify-center">
-			<form
-				className="w-[420px] min-h-[580px] p-[40px] "
-				onSubmit={onLogin}
-			>
+			<form className="w-[420px] min-h-[580px] p-[40px] ">
 				<input
 					className="w-full h-10 border border-gray-300 rounded px-[14px]"
 					placeholder="Email"
@@ -69,7 +78,8 @@ function Login() {
 
 				<button
 					className="w-full h-10 bg-[#42A7C3] rounded mt-[32px]"
-					type="submit"
+					type="button"
+					onClick={onLogin}
 				>
 					LOGIN
 				</button>
