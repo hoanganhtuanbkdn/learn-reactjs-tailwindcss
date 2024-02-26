@@ -19,6 +19,7 @@ function Header() {
 				<Menu href="/product" label="Product" />
 				<Menu href="/contact" label="Contact" />
 				<Menu href="/about-us" label="About Us" />
+				{email && <Menu href="/admin/posts" label="Admin" />}
 			</div>
 
 			{!!email ? (

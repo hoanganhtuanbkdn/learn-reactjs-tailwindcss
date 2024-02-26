@@ -13,6 +13,10 @@ import AuthLayout from './components/AuthLayout';
 
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { createContext } from 'react';
+import Admin from './pages/Admin';
+import Posts from './pages/Posts';
+import PostCreate from './pages/PostCreate';
+import PostEdit from './pages/PostEdit';
 
 export const ThemeContext = createContext('light');
 
@@ -34,6 +38,17 @@ export default function App() {
 							element={<ProductDetail />}
 						/>
 						<Route path="about-us" element={<AboutUs />} />
+						<Route path="admin" element={<Admin />}>
+							<Route path="posts" element={<Posts />} />
+							<Route
+								path="posts/create"
+								element={<PostCreate />}
+							/>
+							<Route
+								path="posts/edit/:postId"
+								element={<PostEdit />}
+							/>
+						</Route>
 
 						<Route element={<AuthLayout />}>
 							<Route path="login" element={<Login />} />

@@ -40,7 +40,7 @@ function Login() {
 				if (response.length > 0) {
 					// Lưu email vào context
 					setUserEmail(email);
-					alert('Login Successful With: ' + email + ' | ' + password);
+					alert('Login Successful');
 					navigate('/');
 				} else {
 					return alert('Email or Password incorrect');
