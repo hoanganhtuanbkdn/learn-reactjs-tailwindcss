@@ -17,41 +17,44 @@ import Posts from './pages/Posts';
 import PostCreate from './pages/PostCreate';
 import PostEdit from './pages/PostEdit';
 import { Provider } from 'react-redux';
-import store from './stores/store';
+import { store, persistor } from './stores/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 export default function App() {
 	return (
 		<Provider store={store}>
-			<BrowserRouter>
-				<Routes>
-					<Route path="/" element={<Layout />}>
-						<Route index element={<Home />} />
-						<Route path="contact" element={<Contact />} />
-						<Route path="product" element={<Product />} />
-						<Route
-							path="product/:productName"
-							element={<ProductDetail />}
-						/>
-						<Route path="about-us" element={<AboutUs />} />
-						<Route path="admin" element={<Admin />}>
-							<Route path="posts" element={<Posts />} />
+			<PersistGate loading={null} persistor={persistor}>
+				<BrowserRouter>
+					<Routes>
+						<Route path="/" element={<Layout />}>
+							<Route index element={<Home />} />
+							<Route path="contact" element={<Contact />} />
+							<Route path="product" element={<Product />} />
 							<Route
-								path="posts/create"
-								element={<PostCreate />}
+								path="product/:productName"
+								element={<ProductDetail />}
 							/>
-							<Route
-								path="posts/edit/:postId"
-								element={<PostEdit />}
-							/>
-						</Route>
+							<Route path="about-us" element={<AboutUs />} />
+							<Route path="admin" element={<Admin />}>
+								<Route path="posts" element={<Posts />} />
+								<Route
+									path="posts/create"
+									element={<PostCreate />}
+								/>
+								<Route
+									path="posts/edit/:postId"
+									element={<PostEdit />}
+								/>
+							</Route>
 
-						<Route element={<AuthLayout />}>
-							<Route path="login" element={<Login />} />
-							<Route path="register" element={<Register />} />
+							<Route element={<AuthLayout />}>
+								<Route path="login" element={<Login />} />
+								<Route path="register" element={<Register />} />
+							</Route>
 						</Route>
-					</Route>
-				</Routes>
-			</BrowserRouter>
+					</Routes>
+				</BrowserRouter>
+			</PersistGate>
 		</Provider>
 	);
 }

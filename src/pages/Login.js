@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
-import { connect } from 'react-redux';
-import { login } from '../stores/actions';
-
+import { useDispatch } from 'react-redux';
+import { loginRequest } from '../stores/reducers/usersReducer';
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-function Login({ loginRequest }) {
+function Login() {
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -39,7 +39,7 @@ function Login({ loginRequest }) {
 				if (response.length > 0) {
 					// Lưu email vào context
 					// setUserEmail(email);
-					loginRequest(email);
+					dispatch(loginRequest({ email }));
 					alert('Login Successful');
 					navigate('/');
 				} else {
@@ -111,7 +111,5 @@ function Login({ loginRequest }) {
 		</div>
 	);
 }
-const mapDispatchToProps = (dispatch) => ({
-	loginRequest: (payload) => dispatch(login(payload)),
-});
-export default connect(null, mapDispatchToProps)(Login);
+
+export default Login;

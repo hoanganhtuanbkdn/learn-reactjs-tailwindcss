@@ -1,10 +1,18 @@
-import { connect } from 'react-redux';
+/* eslint-disable no-restricted-globals */
+import { useDispatch, useSelector } from 'react-redux';
 import Logo from '../assets/images/logo.png';
 import Menu from './Menu';
 import { Link } from 'react-router-dom';
+import { logoutRequest } from '../stores/reducers/usersReducer';
 
-function Header({ email }) {
-	console.log('email', email);
+function Header() {
+	const email = useSelector((state) => state.users.email);
+	const dispatch = useDispatch();
+	const onLogout = () => {
+		if (confirm('Do you want to logout ?')) {
+			dispatch(logoutRequest());
+		}
+	};
 	return (
 		<header
 			className={
@@ -22,7 +30,15 @@ function Header({ email }) {
 			</div>
 
 			{!!email ? (
-				<p className="text-[#FA8443]">{email}</p>
+				<div className="flex flex-row items-center justify-center gap-4">
+					<p className="text-[#FA8443]">{email}</p>
+					<button
+						onClick={onLogout}
+						className="bg-[#FA8443] rounded-lg h-[46px] px-4 text-white flex items-center justify-center	"
+					>
+						LogOut
+					</button>
+				</div>
 			) : (
 				<Link
 					to="/login"
@@ -35,8 +51,4 @@ function Header({ email }) {
 	);
 }
 
-const mapStateToProps = (store) => ({
-	email: store.user.email,
-});
-
-export default connect(mapStateToProps)(Header);
+export default Header;
