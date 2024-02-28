@@ -30,25 +30,27 @@ function Login() {
 			return alert('Password must min 8 characters');
 		}
 
-		fetch(`http://localhost:4000/users?email=${email}&password=${password}`)
-			.then((raw) => raw.json())
-			.then((response) => {
-				// Nếu email và password đúng thì response sẽ trả về kết quả
-				// Nếu email và password sai, response sẽ trả về mảng rỗng.
+		dispatch(loginRequest({ email, password }));
 
-				if (response.length > 0) {
-					// Lưu email vào context
-					// setUserEmail(email);
-					dispatch(loginRequest({ email }));
-					alert('Login Successful');
-					navigate('/');
-				} else {
-					return alert('Email or Password incorrect');
-				}
-			})
-			.catch((error) => {
-				return alert(error.message);
-			});
+		// fetch(`http://localhost:4000/users?email=${email}&password=${password}`)
+		// 	.then((raw) => raw.json())
+		// 	.then((response) => {
+		// 		// Nếu email và password đúng thì response sẽ trả về kết quả
+		// 		// Nếu email và password sai, response sẽ trả về mảng rỗng.
+
+		// 		if (response.length > 0) {
+		// 			// Lưu email vào context
+		// 			// setUserEmail(email);
+		// 			dispatch(loginRequest({ email }));
+		// 			alert('Login Successful');
+		// 			navigate('/');
+		// 		} else {
+		// 			return alert('Email or Password incorrect');
+		// 		}
+		// 	})
+		// 	.catch((error) => {
+		// 		return alert(error.message);
+		// 	});
 	};
 	return (
 		<div className="flex items-center justify-center">
