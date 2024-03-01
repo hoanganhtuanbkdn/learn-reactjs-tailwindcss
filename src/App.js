@@ -37,7 +37,7 @@ const Item = () => {
 				)}
 			</button>
 			<div className="flex-1">
-				<p>Get a new helmet</p>
+				<p className={isActive && 'line-through'}>Get a new helmet</p>
 			</div>
 			<button className="hover:bg-gray-200 p-2 rounded-lg">
 				<img src={TrashIco} alt="" />
