@@ -19,3 +19,11 @@ export const ChangeStatus = (id, newStatus) => {
 		newStatus,
 	};
 };
+
+export const ChangeLabel = (id, newLabel) => {
+	return {
+		type: 'CHANGE_LABEL',
+		id,
+		newLabel,
+	};
+};
