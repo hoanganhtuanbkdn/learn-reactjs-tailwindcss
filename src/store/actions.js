@@ -27,3 +27,9 @@ export const ChangeLabel = (id, newLabel) => {
 		newLabel,
 	};
 };
+export const ChangeMenu = (newMenuActive) => {
+	return {
+		type: 'CHANGE_MENU',
+		newMenuActive,
+	};
+};

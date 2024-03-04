@@ -1,16 +1,24 @@
 const stateInitial = {
 	todos: [],
+	menuActive: 'All',
 };
 
 const rootReducer = (state = stateInitial, action) => {
 	switch (action.type) {
 		case 'ADD_TODO':
 			return {
+				...state,
 				// Thêm mới một todo, và thêm ở đầu danh sách
 				todos: [action.item, ...state.todos],
 			};
+		case 'CHANGE_MENU':
+			return {
+				...state,
+				menuActive: action.newMenuActive,
+			};
 		case 'DELETE_TODO':
 			return {
+				...state,
 				todos: state.todos.filter((item) => item.id !== action.item.id),
 			};
 		case 'CHANGE_STATUS': {
@@ -28,6 +36,7 @@ const rootReducer = (state = stateInitial, action) => {
 				finish: newStatus,
 			};
 			return {
+				...state,
 				todos: currentTodos,
 			};
 		}
@@ -47,6 +56,7 @@ const rootReducer = (state = stateInitial, action) => {
 				label: newLabel,
 			};
 			return {
+				...state,
 				todos: currentTodos,
 			};
 		}
