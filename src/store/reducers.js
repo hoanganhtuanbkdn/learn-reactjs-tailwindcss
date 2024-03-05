@@ -1,3 +1,11 @@
+import {
+	ADD_TODO,
+	DELETE_TODO,
+	CHANGE_STATUS,
+	CHANGE_LABEL,
+	CHANGE_MENU,
+} from './types';
+
 const stateInitial = {
 	todos: [],
 	menuActive: 'All',
@@ -5,23 +13,23 @@ const stateInitial = {
 
 const rootReducer = (state = stateInitial, action) => {
 	switch (action.type) {
-		case 'ADD_TODO':
+		case ADD_TODO:
 			return {
 				...state,
 				// Thêm mới một todo, và thêm ở đầu danh sách
 				todos: [action.item, ...state.todos],
 			};
-		case 'CHANGE_MENU':
+		case CHANGE_MENU:
 			return {
 				...state,
 				menuActive: action.newMenuActive,
 			};
-		case 'DELETE_TODO':
+		case DELETE_TODO:
 			return {
 				...state,
 				todos: state.todos.filter((item) => item.id !== action.item.id),
 			};
-		case 'CHANGE_STATUS': {
+		case CHANGE_STATUS: {
 			const { id, newStatus } = action;
 			const currentTodos = [...state.todos];
 			// Tìm vị trí của phần tử cần thay đổi
@@ -40,7 +48,7 @@ const rootReducer = (state = stateInitial, action) => {
 				todos: currentTodos,
 			};
 		}
-		case 'CHANGE_LABEL': {
+		case CHANGE_LABEL: {
 			const { id, newLabel } = action;
 			const currentTodos = [...state.todos];
 

@@ -14,7 +14,7 @@ export default function Menu() {
 			{ListMenu.map((menu) => (
 				<button
 					key={menu}
-					className={`py-4 hover:bg-[#F3F3F3] ${
+					className={`py-4 text-left px-4 hover:bg-[#F3F3F3] ${
 						menu === menuActive && 'bg-[#F3F3F3]'
 					}`}
 					onClick={() => onChangeMenu(menu)}

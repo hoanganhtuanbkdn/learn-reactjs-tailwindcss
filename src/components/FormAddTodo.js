@@ -8,8 +8,10 @@ export default function FormAddTodo() {
 	const [type, setType] = useState('Working');
 	const dispatch = useDispatch();
 
-	// Nhấn enter sẽ tạo 1 công việc mới
+	// Nhấn button Add sẽ tạo 1 công việc mới
 	const onAddNewTodo = () => {
+		// Kiểm tra label, nếu trống sẽ không submit
+		if (!label) return;
 		dispatch(
 			AddTodo({
 				label,
@@ -19,17 +21,27 @@ export default function FormAddTodo() {
 			})
 		);
 		// Sau khi tạo thành công cần reset nội dung của label và type
-
 		setLabel('');
 		setType('Working');
 	};
+
+	// Nhấn enter sẽ tạo 1 công việc mới
+	const onKeyDown = (e) => {
+		// Kiểm tra label, nếu trống sẽ không submit
+
+		if (!label) return;
+		if (e.key === 'Enter') {
+			onAddNewTodo();
+		}
+	};
 	return (
-		<div className="flex flex-row gap-3 items-center mt-5">
+		<div className="flex flex-row items-center gap-3 mt-5">
 			<input
 				className="bg-[#F3F3F3] flex-1 h-[46px] rounded-lg px-4 "
 				placeholder="Task label "
 				value={label}
 				onChange={(e) => setLabel(e.target.value)}
+				onKeyDown={onKeyDown}
 			/>
 			<select
 				className="bg-[#F3F3F3] flex-1 h-[46px] rounded-lg px-4 "

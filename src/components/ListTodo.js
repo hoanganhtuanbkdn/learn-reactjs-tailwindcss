@@ -33,7 +33,7 @@ function App() {
 		<div className="w-[700px] flex flex-col px-10 overflow-hidden">
 			<h1 className="text-3xl font-bold">All Tasks</h1>
 			<FormAddTodo />
-			<div className="mt-5 space-y-4 overflow-y-scroll h-full ">
+			<div className="h-full mt-5 space-y-4 overflow-y-auto ">
 				{listTodos.map((item, index) => (
 					<Item
 						key={item.id}
@@ -88,30 +88,30 @@ const Item = ({ item, index, onDeleteTodo, onChangeStatus, onChangeLabel }) => {
 			<div className="flex-1">
 				{isEditing ? (
 					<input
-						className="border border-green-800 px-2 rounded-md"
+						className="px-2 bg-white border h-[28px] border-green-800 rounded-md"
 						value={item.label}
 						onChange={onChangeTodoLabel}
 						onKeyDown={onKeyDown}
 					/>
 				) : (
-					<div className="flex flex-row gap-10 items-center">
+					<div className="flex flex-row items-center justify-between gap-10 px-2">
 						<p className={item.finish && 'line-through'}>
 							{item.label}
 						</p>
-						<p className="text-xs bg-green-200 p-1 rounded-md">
+						<p className="p-1 text-xs text-green-900 bg-green-200 rounded-md">
 							{item.type}
 						</p>
 					</div>
 				)}
 			</div>
 			<button
-				className="hover:bg-gray-200 p-2 rounded-lg "
+				className="p-2 rounded-lg hover:bg-gray-200 "
 				onClick={onToggleEdit}
 			>
 				<FaRegEdit />
 			</button>
 			<button
-				className="hover:bg-gray-200 p-2 rounded-lg "
+				className="p-2 rounded-lg hover:bg-gray-200 "
 				onClick={() => onDeleteTodo(item)}
 			>
 				<FaRegTrashAlt />
