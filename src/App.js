@@ -2,11 +2,11 @@
 import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-	AddTodo,
-	ChangeLabel,
-	ChangeStatus,
-	DeleteTodo,
-} from './store/actions';
+	addTodo,
+	changeLabel,
+	changeStatus,
+	deleteTodo,
+} from './store/todoSlice';
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
 		if (!e.target.value) return;
 		if (e.key === 'Enter') {
 			dispatch(
-				AddTodo({
+				addTodo({
 					label: e.target.value,
 					id: Date.now(),
 					completed: false,
@@ -32,16 +32,16 @@ function App() {
 
 	const onDeleteTodo = (item) => {
 		if (confirm('Bạn có muốn xóa công việc này?')) {
-			dispatch(DeleteTodo(item));
+			dispatch(deleteTodo(item));
 		}
 	};
 
-	const onChangeStatus = (id, newStatus) => {
-		dispatch(ChangeStatus(id, newStatus));
+	const onChangeStatus = (newTodo) => {
+		dispatch(changeStatus(newTodo));
 	};
 
-	const onChangeLabel = (id, newLabel) => {
-		dispatch(ChangeLabel(id, newLabel));
+	const onChangeLabel = (newTodo) => {
+		dispatch(changeLabel(newTodo));
 	};
 
 	return (
@@ -78,13 +78,16 @@ const Item = ({ item, index, onDeleteTodo, onChangeStatus, onChangeLabel }) => {
 
 	// Thay đổi trạng thái của todo ( hoàn thành và chưa hoàn thành)
 	const onToggle = () => {
-		onChangeStatus(item.id, !item.completed);
+		onChangeStatus({ id: item.id, newStatus: !item.completed });
 	};
 
 	// Thay đổi nội dung label sẽ thay đổi dữ liệu đang lưu ở redux
 	const onChangeTodoLabel = (event) => {
 		const newLabel = event.target.value;
-		onChangeLabel(item.id, newLabel);
+		onChangeLabel({
+			id: item.id,
+			newLabel,
+		});
 	};
 
 	// Mở input để thay đổi label
