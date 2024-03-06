@@ -1,6 +1,5 @@
 /* eslint-disable no-restricted-globals */
 import { useRef, useState } from 'react';
-import TrashIco from './assets/images/trash.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	AddTodo,
@@ -12,7 +11,7 @@ import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 
 function App() {
 	const inputRef = useRef();
-	const todos = useSelector((state) => state.todos);
+	const { todos } = useSelector((state) => state.todos);
 	const dispatch = useDispatch();
 
 	// Nhấn enter sẽ tạo 1 công việc mới
@@ -23,7 +22,7 @@ function App() {
 				AddTodo({
 					label: e.target.value,
 					id: Date.now(),
-					finish: false,
+					completed: false,
 				})
 			);
 			// Sau khi tạo thành công cần reset nội dung của input
@@ -57,7 +56,7 @@ function App() {
 						onKeyDown={(e) => onAddNewTodo(e)}
 					/>
 				</div>
-				<div className="mt-5 space-y-4 overflow-y-scroll h-full ">
+				<div className="h-full mt-5 space-y-4 overflow-y-scroll ">
 					{todos.map((item, index) => (
 						<Item
 							key={item.id}
@@ -79,7 +78,7 @@ const Item = ({ item, index, onDeleteTodo, onChangeStatus, onChangeLabel }) => {
 
 	// Thay đổi trạng thái của todo ( hoàn thành và chưa hoàn thành)
 	const onToggle = () => {
-		onChangeStatus(item.id, !item.finish);
+		onChangeStatus(item.id, !item.completed);
 	};
 
 	// Thay đổi nội dung label sẽ thay đổi dữ liệu đang lưu ở redux
@@ -106,32 +105,32 @@ const Item = ({ item, index, onDeleteTodo, onChangeStatus, onChangeLabel }) => {
 				className="h-[28px] w-[28px] rounded-lg border border-[#EA5959] flex items-center justify-center"
 				onClick={onToggle}
 			>
-				{item.finish && (
+				{item.completed && (
 					<div className="bg-[#EA5959] rounded-md	 w-5 h-5" />
 				)}
 			</button>
 			<div className="flex-1">
 				{isEditing ? (
 					<input
-						className="border border-green-800 px-2 rounded-md"
+						className="px-2 border border-green-800 rounded-md"
 						value={item.label}
 						onChange={onChangeTodoLabel}
 						onKeyDown={onKeyDown}
 					/>
 				) : (
-					<p className={item.finish && 'line-through'}>
+					<p className={item.completed && 'line-through'}>
 						{item.label}
 					</p>
 				)}
 			</div>
 			<button
-				className="hover:bg-gray-200 p-2 rounded-lg "
+				className="p-2 rounded-lg hover:bg-gray-200 "
 				onClick={onToggleEdit}
 			>
 				<FaRegEdit />
 			</button>
 			<button
-				className="hover:bg-gray-200 p-2 rounded-lg "
+				className="p-2 rounded-lg hover:bg-gray-200 "
 				onClick={() => onDeleteTodo(item)}
 			>
 				<FaRegTrashAlt />
