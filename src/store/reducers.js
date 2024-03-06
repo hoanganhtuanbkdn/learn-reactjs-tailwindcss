@@ -31,41 +31,32 @@ const rootReducer = (state = stateInitial, action) => {
 			};
 		case CHANGE_STATUS: {
 			const { id, newStatus } = action;
-			const currentTodos = [...state.todos];
-			// Tìm vị trí của phần tử cần thay đổi
-			const itemIndex = currentTodos.findIndex((item) => item.id === id);
-
-			// Phần từ cần thay đổi
-			const targetItem = currentTodos[itemIndex];
-
-			// Gán dữ liệu mới cho phần tử cần thay đổi của mảng
-			currentTodos[itemIndex] = {
-				...targetItem,
-				finish: newStatus,
-			};
+			const newTodos = state.todos.map((todo) =>
+				todo.id === id
+					? {
+							...todo,
+							completed: newStatus,
+					  }
+					: todo
+			);
 			return {
 				...state,
-				todos: currentTodos,
+				todos: newTodos,
 			};
 		}
 		case CHANGE_LABEL: {
 			const { id, newLabel } = action;
-			const currentTodos = [...state.todos];
-
-			// Tìm vị trí của phần tử cần thay đổi
-			const itemIndex = currentTodos.findIndex((item) => item.id === id);
-
-			// Phần từ cần thay đổi
-			const targetItem = currentTodos[itemIndex];
-
-			// Gán dữ liệu mới cho phần tử cần thay đổi của mảng
-			currentTodos[itemIndex] = {
-				...targetItem,
-				label: newLabel,
-			};
+			const newTodos = state.todos.map((todo) =>
+				todo.id === id
+					? {
+							...todo,
+							label: newLabel,
+					  }
+					: todo
+			);
 			return {
 				...state,
-				todos: currentTodos,
+				todos: newTodos,
 			};
 		}
 		default: {
