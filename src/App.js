@@ -27,14 +27,11 @@ export default function App() {
 				<Routes>
 					<Route path="/" element={<Layout />}>
 						<Route index element={<Home />} />
-						<Route path="contact" element={<Contact />} />
 						<Route path="product" element={<Product />} />
 						<Route
 							path="product/:productName"
 							element={<ProductDetail />}
 						/>
-						<Route path="about-us" element={<AboutUs />} />
-
 						<Route element={<AuthLayout />}>
 							<Route path="login" element={<Login />} />
 							<Route path="register" element={<Register />} />

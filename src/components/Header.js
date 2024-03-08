@@ -17,8 +17,6 @@ function Header() {
 			</Link>
 			<div className="space-x-[80px]">
 				<Menu href="/product" label="Product" />
-				<Menu href="/contact" label="Contact" />
-				<Menu href="/about-us" label="About Us" />
 			</div>
 
 			{!!email ? (
