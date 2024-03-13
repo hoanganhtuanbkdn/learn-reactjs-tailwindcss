@@ -23,10 +23,12 @@ const todosSlice = createSlice({
 			);
 		},
 		changeLabel(state, action) {
-			const { id, newLabel } = action.payload;
+			const { id, label, category } = action.payload;
 
 			state.todos = [...state.todos].map((todo) =>
-				todo.id === id ? { ...todo, label: newLabel } : todo
+				todo.id === id
+					? { ...todo, label: label, category: category }
+					: todo
 			);
 		},
 	},
