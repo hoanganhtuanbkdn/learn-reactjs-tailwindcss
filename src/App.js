@@ -26,6 +26,10 @@ function App() {
 				completed: false,
 			})
 		);
+
+		// Reset input sau khi tạo thành công
+		setLabel('');
+		setCategory('');
 	};
 
 	const onDeleteTodo = (item) => {
@@ -94,8 +98,8 @@ const Item = ({ item, index, onDeleteTodo, onChangeStatus, onChangeLabel }) => {
 		onChangeStatus({ id: item.id, newStatus: !item.completed });
 	};
 
-	// Thay đổi nội dung label sẽ thay đổi dữ liệu đang lưu ở redux
 	const onChangeTodo = () => {
+		// Thay đổi nội dung sẽ thay đổi dữ liệu đang lưu ở redux
 		onChangeLabel({
 			id: item.id,
 			label: label,
@@ -104,7 +108,7 @@ const Item = ({ item, index, onDeleteTodo, onChangeStatus, onChangeLabel }) => {
 		setIsEditing(false);
 	};
 
-	// Mở input để thay đổi label
+	// Mở / đóng input để thay đổi nội dung
 	const onToggleEdit = () => {
 		setIsEditing(!isEditing);
 	};
