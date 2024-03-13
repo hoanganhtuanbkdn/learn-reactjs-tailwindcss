@@ -46,26 +46,27 @@ function App() {
 		<div className=" bg-[#EA5959] h-screen w-screen flex items-center justify-center">
 			<div className="w-[983px] h-[502px] flex flex-col bg-white rounded-lg shadow-md py-5 px-10 overflow-hidden">
 				<h1 className="text-3xl font-bold">All Tasks</h1>
-				<div className="flex flex-row gap-4">
+				<div className="flex flex-row gap-4 mt-5">
 					<input
-						className="bg-[#F3F3F3] flex flex-1 h-[46px] rounded-lg px-4 mt-5"
+						className="bg-[#F3F3F3] flex flex-1 h-[46px] rounded-lg px-4 "
 						placeholder="Label "
 						value={label}
 						onChange={(e) => setLabel(e.target.value)}
 					/>
 					<input
-						className="bg-[#F3F3F3] flex flex-1 h-[46px] rounded-lg px-4 mt-5"
+						className="bg-[#F3F3F3] flex flex-1 h-[46px] rounded-lg px-4 "
 						placeholder="Category "
 						value={category}
 						onChange={(e) => setCategory(e.target.value)}
 					/>
+					<button
+						className="p-3 bg-green-500 h-[46px] rounded-lg w-[200px]"
+						onClick={onAddNewTodo}
+					>
+						Add new Todo
+					</button>
 				</div>
-				<button
-					className="p-3 mt-4 bg-red-200 rounded-lg w-[200px]"
-					onClick={onAddNewTodo}
-				>
-					Add new Todo
-				</button>
+
 				<div className="h-full mt-5 space-y-4 overflow-y-scroll ">
 					{todos.map((item, index) => (
 						<Item
@@ -109,7 +110,7 @@ const Item = ({ item, index, onDeleteTodo, onChangeStatus, onChangeLabel }) => {
 	};
 
 	return (
-		<div className="flex flex-row items-center gap-4 h-10 hover:bg-[#F3F3F3] py1 px-3 rounded-lg">
+		<div className="flex flex-row items-center h-10 gap-4 px-3 rounded-lg py1">
 			<p className="text-xs">{index + 1}.</p>
 			<button
 				className="h-[28px] w-[28px] rounded-lg border border-[#EA5959] flex items-center justify-center"
@@ -144,9 +145,20 @@ const Item = ({ item, index, onDeleteTodo, onChangeStatus, onChangeLabel }) => {
 				)}
 
 				{isEditing && (
-					<button onClick={onChangeTodo} className="p-2 bg-green-200">
-						Save
-					</button>
+					<>
+						<button
+							onClick={onChangeTodo}
+							className="p-2 bg-green-200 rounded-lg"
+						>
+							Save
+						</button>
+						<button
+							onClick={onToggleEdit}
+							className="p-2 bg-gray-200 rounded-lg"
+						>
+							Cancel
+						</button>
+					</>
 				)}
 			</div>
 			<button
