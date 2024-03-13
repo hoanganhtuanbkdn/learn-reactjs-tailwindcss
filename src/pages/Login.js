@@ -1,12 +1,12 @@
 import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
-import { ThemeContext } from '../App';
+import { AuthContext } from '../context';
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function Login() {
-	const { setUserEmail } = useContext(ThemeContext);
+	const { setAuthEmail } = useContext(AuthContext);
 
 	const navigate = useNavigate();
 	const [email, setEmail] = useState('');
@@ -34,7 +34,7 @@ function Login() {
 		}
 
 		// Lưu email vào context
-		setUserEmail(email);
+		setAuthEmail(email);
 		alert('Login Successful With: ' + email + ' | ' + password);
 		navigate('/');
 	};

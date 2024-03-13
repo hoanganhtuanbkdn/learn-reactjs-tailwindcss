@@ -2,10 +2,9 @@ import Logo from '../assets/images/logo.png';
 import Menu from './Menu';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import { ThemeContext } from '../App';
+import { AuthContext } from '../context';
 function Header() {
-	const { email } = useContext(ThemeContext);
-
+	const { authEmail } = useContext(AuthContext);
 	return (
 		<header
 			className={
@@ -19,14 +18,14 @@ function Header() {
 				<Menu href="/product" label="Product" />
 			</div>
 
-			{!!email ? (
-				<p className="text-[#FA8443]">{email}</p>
+			{!!authEmail ? (
+				<p className="text-[#FA8443]">{authEmail}</p>
 			) : (
 				<Link
 					to="/login"
 					className="bg-[#FA8443] rounded-lg h-[46px] px-4 text-white flex items-center justify-center	"
 				>
-					<span>Sign In {email}</span>
+					<span>Sign In</span>
 				</Link>
 			)}
 		</header>
